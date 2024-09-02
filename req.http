@@ -1,0 +1,24 @@
+GET http://localhost:3333/products HTTP/1.1
+
+###
+POST http://localhost:3333/products/create HTTP/1.1
+content-type: application/json
+
+{
+  "products": [
+    {
+      "name": "Caneta",
+      "description": "Azul",
+      "price": 2.5
+    },
+    {
+      "name": "Caneta",
+      "description": "Preta",
+      "price": 2.5
+    },{
+      "name": "Caneta",
+      "description": "Vermelha",
+      "price": 2.5
+    }
+  ]
+}
