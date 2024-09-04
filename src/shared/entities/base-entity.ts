@@ -6,7 +6,7 @@ export abstract class BaseEntity {
   public readonly updatedAt: Date;
 
   constructor() {
-    this.id = Id.generate();
+    this.id = Id.new();
     this.createdAt = new Date();
     this.updatedAt = new Date();
   }

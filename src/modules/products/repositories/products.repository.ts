@@ -1,26 +1,15 @@
-import { PrismaService } from '@/infra/database/prisma-service';
+import { CreateProductDto } from '../dto/create-product.dto';
+import { UpdateProductDto } from '../dto/update-product.dto';
 import { Product } from '../entities/product';
 
-export class ProductsRepository {
-  constructor(private readonly prisma: PrismaService) {}
+export interface ProductsRepository {
+  findAll: () => Promise<Product[]>;
 
-  async findAll() {
-    return this.prisma.product.findMany();
-  }
+  findOne: (id: string) => Promise<Product | null>;
 
-  async findOne(id: string) {
-    return this.prisma.product.findUnique({ where: { id } });
-  }
+  create: (products: CreateProductDto[]) => Promise<void>;
 
-  async create(products: Product[]) {
-    return this.prisma.product.createMany({ data: products });
-  }
+  update: (id: string, product: UpdateProductDto) => Promise<Product>;
 
-  async update(id: string, product: Product) {
-    return this.prisma.product.update({ where: { id }, data: product });
-  }
-
-  async delete(id: string) {
-    return this.prisma.product.delete({ where: { id } });
-  }
+  delete: (id: string) => Promise<Product>;
 }
