@@ -12,5 +12,14 @@ services:
     ports:
       - '5432:5432'
 
+  app:
+    build: .
+    ports:
+      - '3333:3333'
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/mydb
+    depends_on:
+      - postgres
+
 volumes:
   postgres:
