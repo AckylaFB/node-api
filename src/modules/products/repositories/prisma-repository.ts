@@ -28,6 +28,6 @@ export class PrismaRepository
   }
 
   async delete(id: string) {
-    return this.product.delete({ where: { id } });
+    await this.product.delete({ where: { id } });
   }
 }

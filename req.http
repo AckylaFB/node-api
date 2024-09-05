@@ -1,24 +1,31 @@
 GET http://localhost:3333/products HTTP/1.1
 
 ###
-POST http://localhost:3333/products/create HTTP/1.1
+POST http://localhost:3333/products HTTP/1.1
 content-type: application/json
 
 {
   "products": [
     {
-      "name": "Caneta",
-      "description": "Azul",
-      "price": 2.5
+      "name": "Lápis",
+      "description": "Preto",
+      "price": 1
     },
     {
-      "name": "Caneta",
-      "description": "Preta",
-      "price": 2.5
-    },{
-      "name": "Caneta",
-      "description": "Vermelha",
-      "price": 2.5
+      "name": "Borracha",
+      "description": "Borracha dupla face",
+      "price": 0.5
     }
   ]
 }
+
+###
+PATCH http://localhost:3333/products/01758db2-fcbf-4360-b6aa-43bcfc407e34 HTTP/1.1
+content-type: application/json
+
+{
+  "description": "Borracha branca"
+}
+
+### 
+DELETE http://localhost:3333/products/5b70c0ff-5450-4825-82d9-7a47c78d12cf HTTP/1.1

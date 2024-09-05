@@ -11,5 +11,5 @@ export interface ProductsRepository {
 
   update: (id: string, product: UpdateProductDto) => Promise<Product>;
 
-  delete: (id: string) => Promise<Product>;
+  delete: (id: string) => Promise<void>;
 }
