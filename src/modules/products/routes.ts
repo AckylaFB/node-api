@@ -5,7 +5,7 @@ import {
   findAllProductsController,
   findOneProductController,
   updateProductController,
-} from '.';
+} from './controllers';
 import { validateCreateProduct } from './middlewares/validate-create-product';
 
 const productsRouter = Router();

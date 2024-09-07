@@ -15,21 +15,39 @@ describe('CreateProductUseCase', () => {
     createProductUseCase = new CreateProductUseCase(productsRepositoryMock);
   });
 
-  it('should create products and return them', async () => {
+  it('should create products and return them with correct properties', async () => {
     const createProductDtos: CreateProductDto[] = [
       { name: 'Product 1', price: 10, description: 'Description 1' },
       { name: 'Product 2', price: 20, description: 'Description 2' },
     ];
 
-    const createdProducts = createProductDtos.map((dto) => new Product(dto));
-
-    (productsRepositoryMock.create as any).mockResolvedValue(undefined);
-
     const result = await createProductUseCase.execute(createProductDtos);
 
+    expect(result).toHaveLength(createProductDtos.length);
+    result.forEach((product, index) => {
+      expect(product).toBeInstanceOf(Product);
+      expect(product.name).toBe(createProductDtos[index].name);
+      expect(product.price).toBe(createProductDtos[index].price);
+      expect(product.description).toBe(createProductDtos[index].description);
+    });
+  });
+
+  it('should call the repository to create products', async () => {
+    const createProductDtos: CreateProductDto[] = [
+      { name: 'Product 1', price: 10, description: 'Description 1' },
+    ];
+
+    await createProductUseCase.execute(createProductDtos);
+
+    expect(productsRepositoryMock.create).toHaveBeenCalledTimes(1);
     expect(productsRepositoryMock.create).toHaveBeenCalledWith(
-      expect.arrayContaining([expect.any(Product), expect.any(Product)]),
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'Product 1',
+          price: 10,
+          description: 'Description 1',
+        }),
+      ]),
     );
-    expect(result).toEqual(createdProducts);
   });
 });
