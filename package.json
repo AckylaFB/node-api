@@ -11,7 +11,10 @@
     "test:unit": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
-    "prisma:migrate": "prisma migrate dev"
+    "prisma:migrate": "prisma migrate dev",
+    "docker:run": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:run:build": "docker compose up -d --build"
   },
   "nodemonConfig": {
     "watch": [
